@@ -19,13 +19,17 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { StoreModule } from '@ngrx/store';
+import { TodoItemReducer } from './store/reducers/todoItem.reducer';
+import { TodoCardComponent } from './components/todo-card/todo-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomeComponent,
-    AddItemComponent
+    AddItemComponent,
+    TodoCardComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { MatCardModule } from '@angular/material/card';
     MatExpansionModule,
     MatListModule,
     MatTooltipModule,
-    MatCardModule
+    MatCardModule,
+    StoreModule.forRoot({ todo: TodoItemReducer })
   ],
   providers: [
     MatNativeDateModule,

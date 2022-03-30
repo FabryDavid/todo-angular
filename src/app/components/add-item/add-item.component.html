@@ -108,6 +108,6 @@
   </mat-card-content>
 
   <mat-card-actions align='start' class='px-2'>
-    <button [disabled]='todoItemForm.invalid' color='accent' mat-flat-button>Save</button>
+    <button [disabled]='todoItemForm.invalid' (click)='saveItem()' color='accent' mat-flat-button>Save</button>
   </mat-card-actions>
 </mat-card>

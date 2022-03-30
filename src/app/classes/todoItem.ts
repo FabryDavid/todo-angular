@@ -3,16 +3,18 @@ import { v4 as uuidv4 } from 'uuid';
 import { SubTask } from './subTask';
 
 export class TodoItem {
-  private readonly _id: string;
 
   constructor(
     private _title: string,
     private _description: string,
     private _date: Date | null,
     private _done = false,
-    private _subTasks: Array<SubTask> = []
+    private _subTasks: Array<SubTask> = [],
+    public readonly _id: string = ''
   ) {
-    this._id = uuidv4();
+    if (this._id === '') {
+      this._id = uuidv4();
+    }
   }
 
   get title(): string {
