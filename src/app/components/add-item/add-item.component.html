@@ -1,95 +1,103 @@
-<mat-card class="w-50 mx-auto mat-elevation-z4">
+<mat-card class='w-50 mx-auto mat-elevation-z4'>
   <mat-card-title>Add tip</mat-card-title>
 
   <mat-card-content>
     <form
-      #todoItemForm="ngForm"
-      (ngSubmit)="saveItem()"
-      class="d-flex flex-column justify-content-center w-100 mx-auto"
+      #todoItemForm='ngForm'
+      (ngSubmit)='saveItem()'
+      class='d-flex flex-column justify-content-center w-100 mx-auto'
     >
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance='outline'>
         <mat-label>Todo item title</mat-label>
         <mat-icon matPrefix>title</mat-icon>
-        <input matInput type="text" #titleInput #titleInputModel="ngModel" name="title" maxlength="50" required
-               [(ngModel)]="model.title">
-        <mat-hint align="end">{{titleInput.value?.length || 0}}/{{titleInput.maxLength}}</mat-hint>
-        <mat-error *ngIf="titleInputModel.invalid && titleInputModel.pristine">
+        <input
+          #titleInput
+          #titleInputModel='ngModel'
+          [(ngModel)]='model.title'
+          matInput
+          maxlength='50'
+          name='title'
+          required
+          type='text'
+        >
+        <mat-hint align='end'>{{titleInput.value?.length || 0}}/{{titleInput.maxLength}}</mat-hint>
+        <mat-error *ngIf='titleInputModel.invalid && titleInputModel.pristine'>
           Title is required.
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance='outline'>
         <mat-label>Description</mat-label>
         <mat-icon matPrefix>description</mat-icon>
-        <textarea cdkTextareaAutosize matInput name="description" #descriptionInput maxlength="150"
-                  [(ngModel)]="model.description"></textarea>
-        <mat-hint align="end">{{descriptionInput.value?.length || 0}}/{{descriptionInput.maxLength}}</mat-hint>
+        <textarea #descriptionInput [(ngModel)]='model.description' cdkTextareaAutosize matInput maxlength='150'
+                  name='description'></textarea>
+        <mat-hint align='end'>{{descriptionInput.value?.length || 0}}/{{descriptionInput.maxLength}}</mat-hint>
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance='outline'>
         <mat-label>Target date</mat-label>
-        <input matInput [matDatepicker]="datepicker">
-        <mat-datepicker-toggle matPrefix [for]="datepicker"></mat-datepicker-toggle>
+        <input [matDatepicker]='datepicker' matInput>
+        <mat-datepicker-toggle [for]='datepicker' matPrefix></mat-datepicker-toggle>
         <mat-datepicker #datepicker>
           <mat-datepicker-actions>
             <button mat-button matDatepickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+            <button color='primary' mat-raised-button matDatepickerApply>Apply</button>
           </mat-datepicker-actions>
         </mat-datepicker>
       </mat-form-field>
 
       <mat-accordion>
-        <mat-expansion-panel class="mat-elevation-z0">
-          <mat-expansion-panel-header class="ps-1">
+        <mat-expansion-panel class='mat-elevation-z0'>
+          <mat-expansion-panel-header class='ps-1'>
             <mat-panel-title>
               Sub tasks
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <div *ngIf="model.subTasks.length>0; else noSubTask">
-            <button (click)="removeAllSubtask()" mat-button color="primary">
+          <div *ngIf='model.subTasks.length>0; else noSubTask'>
+            <button (click)='removeAllSubtask()' color='primary' mat-button>
               Remove all
             </button>
-            <mat-list dense role="list">
-              <mat-list-item *ngFor="let item of model.subTasks" role="listitem">
+            <mat-list dense role='list'>
+              <mat-list-item *ngFor='let item of model.subTasks' role='listitem'>
                 <mat-icon
-                  class="cursor-pointer"
-                  mat-list-icon (click)="removeSubtask(item.id)"
-                  matTooltip="Remove item">
+                  (click)='removeSubtask(item.id)'
+                  class='cursor-pointer' mat-list-icon
+                  matTooltip='Remove item'>
                   remove_circle_outline
                 </mat-icon>
-                <div class="ms-2">{{item.title}}</div>
+                <div class='ms-2'>{{item.title}}</div>
               </mat-list-item>
             </mat-list>
           </div>
 
           <ng-template #noSubTask>
-            <p class="text-muted">
+            <p class='text-muted'>
               No subtask added.
             </p>
           </ng-template>
 
           <mat-action-row>
-            <form #subTaskForm="ngForm" (ngSubmit)="addSubTask();subTaskForm.resetForm()" class="w-100">
-              <mat-form-field appearance="outline" class="w-75">
+            <form #subTaskForm='ngForm' (ngSubmit)='addSubTask();subTaskForm.resetForm()' class='w-100'>
+              <mat-form-field appearance='outline' class='w-75'>
                 <mat-label>Todo item title</mat-label>
                 <mat-icon matPrefix>title</mat-icon>
                 <input
-                  matInput type="text"
-                  #subTaskInput
-                  #subTaskInputModel="ngModel"
-                  name="subTaskTitle"
-                  maxlength="50"
+                  #subTaskInput #subTaskInputModel='ngModel'
+                  [(ngModel)]='newSubTask.title'
+                  matInput
+                  maxlength='50'
+                  name='subTaskTitle'
                   required
-                  [(ngModel)]="newSubTask.title"
+                  type='text'
                 >
-                <mat-hint align="end">{{subTaskInput.value?.length || 0}}/{{subTaskInput.maxLength}}</mat-hint>
-                <mat-error *ngIf="subTaskInputModel.invalid && subTaskInputModel.pristine">
+                <mat-hint align='end'>{{subTaskInput.value?.length || 0}}/{{subTaskInput.maxLength}}</mat-hint>
+                <mat-error *ngIf='subTaskInputModel.invalid && subTaskInputModel.pristine'>
                   Title is required.
                 </mat-error>
               </mat-form-field>
 
-              <button [disabled]="subTaskInputModel.invalid" class="ms-2" mat-button color="primary">
+              <button [disabled]='subTaskInputModel.invalid' class='ms-2' color='primary' mat-button>
                 Add new item
               </button>
             </form>
@@ -99,7 +107,7 @@
     </form>
   </mat-card-content>
 
-  <mat-card-actions align="start" class="px-2">
-    <button [disabled]="todoItemForm.invalid" mat-flat-button color="accent">Save</button>
+  <mat-card-actions align='start' class='px-2'>
+    <button [disabled]='todoItemForm.invalid' color='accent' mat-flat-button>Save</button>
   </mat-card-actions>
 </mat-card>

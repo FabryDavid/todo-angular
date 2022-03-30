@@ -1,8 +1,20 @@
 // @ts-ignore
-import {v4 as uuidv4} from 'uuid';
-import {SubTask} from "./subTask";
+import { v4 as uuidv4 } from 'uuid';
+import { SubTask } from './subTask';
 
 export class TodoItem {
+  private readonly _id: string;
+
+  constructor(
+    private _title: string,
+    private _description: string,
+    private _date: Date | null,
+    private _done = false,
+    private _subTasks: Array<SubTask> = []
+  ) {
+    this._id = uuidv4();
+  }
+
   get title(): string {
     return this._title;
   }
@@ -47,27 +59,15 @@ export class TodoItem {
     return this._id;
   }
 
-  private readonly _id: string
-
-  constructor(
-    private _title: string,
-    private _description: string,
-    private _date: Date | null,
-    private _done = false,
-    private _subTasks: Array<SubTask> = []
-  ) {
-    this._id = uuidv4()
-  }
-
   public removeSubtask(subtaskId: string) {
     for (let i = 0; i < this._subTasks.length; i++) {
       if (this._subTasks[i].id === subtaskId) {
-        this._subTasks.splice(i, 1)
+        this._subTasks.splice(i, 1);
       }
     }
   }
 
   public removeAllSubtasks() {
-    this._subTasks = []
+    this._subTasks = [];
   }
 }
