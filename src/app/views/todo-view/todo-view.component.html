@@ -7,14 +7,26 @@
 
     <mat-divider *ngIf='item.subTasks.length>0' inset></mat-divider>
 
-    <mat-selection-list
-      (selectionChange)='onListSelectionChange($event)'
-    >
-      <mat-list-option *ngFor='let subTask of item.subTasks' [value]='subTask.id' [(selected)]='subTask.done'
-                       checkboxPosition='before'>
-        {{subTask.title}}
-      </mat-list-option>
-    </mat-selection-list>
+    <span class='subtasks'>
+      <mat-checkbox class='example-margin'
+                    [checked]='allComplete'
+                    color='accent'
+                    [indeterminate]='someComplete()'
+                    (change)='setAll($event.checked)'>
+        Sub tasks
+      </mat-checkbox>
+    </span>
+    <span class='subtasks'>
+      <ul>
+        <li *ngFor='let subtask of item.subTasks'>
+          <mat-checkbox [(ngModel)]='subtask.done'
+                        color='accent'
+                        (ngModelChange)='updateAllComplete()'>
+            {{subtask.title}}
+          </mat-checkbox>
+        </li>
+      </ul>
+    </span>
 
     <mat-divider inset></mat-divider>
 

@@ -13,9 +13,10 @@ import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dia
 })
 export class TodoViewComponent implements OnInit {
   item: TodoItem = new TodoItem('', '');
-  id: string = '';
+  allComplete: boolean = false;
+  private id: string = '';
   private sub: any;
-  localStorageWorker = new LocalStorageWorker();
+  private localStorageWorker = new LocalStorageWorker();
 
   constructor(
     private route: ActivatedRoute,
@@ -45,23 +46,6 @@ export class TodoViewComponent implements OnInit {
     }
   }
 
-  onListSelectionChange(ob: MatSelectionListChange) {
-    const selectedItems = ob.source.selectedOptions.selected.map((x) => {
-      return {
-        id: x.value,
-        done: true
-      };
-    });
-
-    const selectedIds = selectedItems.map((x) => x.id);
-
-    for (let i = 0; i < this.item.subTasks.length; i++) {
-      this.item.subTasks[i].done = selectedIds.includes(this.item.subTasks[i].id);
-    }
-
-    this.localStorageWorker.updateItem(this.item);
-  }
-
   deleteItem() {
     const dialogRef = this.dialog.open(DeleteDialogComponent);
 
@@ -72,5 +56,26 @@ export class TodoViewComponent implements OnInit {
         }
       }
     });
+  }
+
+  updateAllComplete() {
+    this.allComplete = this.item.subTasks != null && this.item.subTasks.every(t => t.done);
+    this.localStorageWorker.updateItem(this.item);
+  }
+
+  someComplete(): boolean {
+    if (this.item.subTasks == null) {
+      return false;
+    }
+    return this.item.subTasks.filter(t => t.done).length > 0 && !this.allComplete;
+  }
+
+  setAll(completed: boolean) {
+    this.allComplete = completed;
+    if (this.item.subTasks == null) {
+      return;
+    }
+    this.item.subTasks.forEach(t => (t.done = completed));
+    this.localStorageWorker.updateItem(this.item);
   }
 }
