@@ -7,10 +7,9 @@ export class TodoItem {
   constructor(
     private _title: string,
     private _description: string,
-    private _date: Date | null,
     private _done = false,
     private _subTasks: Array<SubTask> = [],
-    public readonly _id: string = ''
+    private _id: string = ''
   ) {
     if (this._id === '') {
       this._id = uuidv4();
@@ -31,14 +30,6 @@ export class TodoItem {
 
   set description(value: string) {
     this._description = value;
-  }
-
-  get date(): Date | null {
-    return this._date;
-  }
-
-  set date(value: Date | null) {
-    this._date = value;
   }
 
   get done(): boolean {
@@ -71,5 +62,24 @@ export class TodoItem {
 
   public removeAllSubtasks() {
     this._subTasks = [];
+  }
+
+  public getSubtasksDoneCount() {
+    let done = 0;
+    this.subTasks.forEach((subTask) => {
+      if (subTask.done) {
+        done++;
+      }
+    });
+
+    return done;
+  }
+
+  public getDonePercent() {
+    if (this.subTasks.length < 1) {
+      return 0;
+    }
+
+    return this.getSubtasksDoneCount() / this.subTasks.length * 100;
   }
 }

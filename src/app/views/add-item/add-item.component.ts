@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../../classes/todoItem';
 import { SubTask } from '../../classes/subTask';
-import { addItemAction } from '../../store/actions/todoItem.actions';
-import { Store } from '@ngrx/store';
+import { Router } from '@angular/router';
+import { LocalStorageWorker } from '../../classes/localStorageWorker';
 
 @Component({
   selector: 'app-add-item',
@@ -10,19 +10,22 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./add-item.component.scss']
 })
 export class AddItemComponent implements OnInit {
-  model = new TodoItem('', '', null);
+  model = new TodoItem('', '');
   newSubTask = new SubTask('');
   panelOpenState = false;
+  localStorageWorker = new LocalStorageWorker();
 
-  constructor(private store: Store<{ todo: Array<TodoItem> }>) {
+  constructor(
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
   }
 
   saveItem() {
-    console.log(this.model);
-    this.store.dispatch(addItemAction({ payload: this.model }));
+    this.localStorageWorker.add(this.model);
+    this.router.navigateByUrl('/');
   }
 
   addSubTask() {

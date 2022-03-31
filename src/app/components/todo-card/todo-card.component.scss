@@ -1,0 +1,12 @@
+.todo-card {
+  transition: all 0.3s ease-out;
+  transform-origin: bottom right;
+
+  &:hover {
+    transform: rotate(4deg);
+  }
+}
+
+.done {
+  background-color: #06C405;
+}

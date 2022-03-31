@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { TodoItem } from '../../classes/todoItem';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-todo-card',
@@ -6,8 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./todo-card.component.scss']
 })
 export class TodoCardComponent implements OnInit {
+  @Input() todo: TodoItem = new TodoItem('', '');
 
-  constructor() { }
+  constructor(
+    public router: Router
+  ) {
+  }
 
   ngOnInit(): void {
   }

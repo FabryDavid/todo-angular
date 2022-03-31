@@ -1,0 +1,26 @@
+<mat-card class='mx-auto w-100 mat-elevation-z8'>
+  <div class='content'>
+    <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-content>
+      <p>{{item.description}}</p>
+    </mat-card-content>
+
+    <mat-divider *ngIf='item.subTasks.length>0' inset></mat-divider>
+
+    <mat-selection-list
+      (selectionChange)='onListSelectionChange($event)'
+    >
+      <mat-list-option *ngFor='let subTask of item.subTasks' [value]='subTask.id' [(selected)]='subTask.done'
+                       checkboxPosition='before'>
+        {{subTask.title}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <mat-divider inset></mat-divider>
+
+    <mat-card-actions align='start' class='mb-0'>
+      <button mat-button color='accent'
+              (click)='switchDoneState()'>{{item.done ? 'Mark as not done' : 'Mark as done'}}</button>
+    </mat-card-actions>
+  </div>
+</mat-card>

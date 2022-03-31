@@ -1,1 +1,20 @@
-<p>todo-card works!</p>
+<mat-card
+  class='todo-card cursor-pointer mat-elevation-z8'
+  [class.done]='todo.done'
+  (click)="router.navigate(['/todo', todo.id])"
+>
+  <mat-card-title>{{todo.title}}</mat-card-title>
+
+  <mat-card-content>
+    <p>
+      {{todo.description}}
+    </p>
+
+    <div *ngIf='todo.subTasks.length>0'>
+      {{todo.getSubtasksDoneCount()}}/{{todo.subTasks.length}}
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-progress-bar color='accent' mode='determinate' [value]='todo.getDonePercent()'></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>

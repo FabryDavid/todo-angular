@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './views/home/home.component';
 import { MatButtonModule } from '@angular/material/button';
-import { AddItemComponent } from './components/add-item/add-item.component';
+import { AddItemComponent } from './views/add-item/add-item.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
@@ -19,9 +19,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
-import { StoreModule } from '@ngrx/store';
-import { TodoItemReducer } from './store/reducers/todoItem.reducer';
 import { TodoCardComponent } from './components/todo-card/todo-card.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TodoViewComponent } from './views/todo-view/todo-view.component';
+import { NotFoundComponent } from './views/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { TodoCardComponent } from './components/todo-card/todo-card.component';
     HeaderComponent,
     HomeComponent,
     AddItemComponent,
-    TodoCardComponent
+    TodoCardComponent,
+    TodoViewComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { TodoCardComponent } from './components/todo-card/todo-card.component';
     MatListModule,
     MatTooltipModule,
     MatCardModule,
-    StoreModule.forRoot({ todo: TodoItemReducer })
+    MatProgressBarModule
   ],
   providers: [
     MatNativeDateModule,

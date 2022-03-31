@@ -1,0 +1,7 @@
+<a class='mb-4' color='accent' href='/add' mat-raised-button>Add new item</a>
+
+<div class='row'>
+  <div class='col-12 col-sm-6 col-md-4 col-lg-3 mt-4' *ngFor='let item of items;'>
+    <app-todo-card [todo]='item'></app-todo-card>
+  </div>
+</div>
