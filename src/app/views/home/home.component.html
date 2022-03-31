@@ -2,14 +2,36 @@
   <mat-icon>add</mat-icon>
 </a>
 
-<div class='row' *ngIf='items.length>0; else noItem'>
-  <div class='col-12 col-sm-6 col-md-4 col-lg-3 mt-4' *ngFor='let item of items;'>
+<div class='d-flex align-items-center'>
+  <p>
+    Show:
+    <mat-button-toggle-group [(ngModel)]='filter' name='filter' class='ms-2'>
+      <mat-button-toggle value='all'>All</mat-button-toggle>
+      <mat-button-toggle value='done'>Done</mat-button-toggle>
+      <mat-button-toggle value='notDone'>Not done</mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+
+  <mat-form-field class='ms-5' appearance='outline'>
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]='searchText' maxlength='150'>
+  </mat-form-field>
+</div>
+
+<div class='row' *ngIf='getItems().length>0; else noItem'>
+  <div class='col-12 col-sm-6 col-md-4 col-lg-3 mt-4' *ngFor='let item of getItems();'>
     <app-todo-card [todo]='item'></app-todo-card>
   </div>
 </div>
 
 <ng-template #noItem>
-  <div class='fs-4 opacity-75 text-center'>
+  <div *ngIf='items.length===0; else noFilterValue' class='fs-4 opacity-75 text-center'>
     No todo item added yet!
   </div>
+
+  <ng-template #noFilterValue>
+    <div class='fs-4 opacity-75 text-center'>
+      No todo item found!
+    </div>
+  </ng-template>
 </ng-template>

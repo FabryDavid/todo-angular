@@ -26,6 +26,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCardModule,
     MatProgressBarModule,
     MatDialogModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatButtonToggleModule
   ],
   providers: [
     MatNativeDateModule,
