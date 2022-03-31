@@ -8,6 +8,7 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'add', component: AddItemComponent },
+  { path: 'add/:id', component: AddItemComponent },
   { path: 'todo/:id', component: TodoViewComponent },
   { path: '404', component: NotFoundComponent },
   { path: '**', redirectTo: '/404' }

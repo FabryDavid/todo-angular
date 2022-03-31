@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoItem } from '../../classes/todoItem';
 import { SubTask } from '../../classes/subTask';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageWorker } from '../../classes/localStorageWorker';
 
 @Component({
@@ -13,19 +13,39 @@ export class AddItemComponent implements OnInit {
   model = new TodoItem('', '');
   newSubTask = new SubTask('');
   panelOpenState = false;
+  sub: any;
+  id: string = '';
   localStorageWorker = new LocalStorageWorker();
 
+
   constructor(
+    private route: ActivatedRoute,
     private router: Router
   ) {
   }
 
   ngOnInit(): void {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+
+      if (this.id && this.id !== '') {
+        const item = this.localStorageWorker.getItemById(this.id);
+        if (item) {
+          this.model = item;
+        } else {
+          this.router.navigate(['404']);
+        }
+      }
+    });
   }
 
   saveItem() {
-    this.localStorageWorker.add(this.model);
-    this.router.navigateByUrl('/');
+    if (this.id && this.id !== '') {
+      this.localStorageWorker.updateItem(this.model);
+    } else {
+      this.localStorageWorker.add(this.model);
+    }
+    this.router.navigate(['todo', this.model.id]);
   }
 
   addSubTask() {

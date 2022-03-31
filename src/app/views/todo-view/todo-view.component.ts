@@ -20,7 +20,7 @@ export class TodoViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
+    public router: Router,
     public dialog: MatDialog
   ) {
   }
