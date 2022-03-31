@@ -3,14 +3,10 @@
   transform-origin: bottom right;
 
   &:hover {
-    transform: rotate(3deg);
+    transform: translateY(-8px);
   }
 
   .deadline-text {
     font-size: 13px;
   }
-}
-
-.done {
-  background-color: #06C405;
 }

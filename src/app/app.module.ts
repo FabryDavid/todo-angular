@@ -27,6 +27,7 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { TodoCardMinimalComponent } from './components/todo-card-minimal/todo-card-minimal.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     TodoCardComponent,
     TodoViewComponent,
     NotFoundComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    TodoCardMinimalComponent
   ],
   imports: [
     BrowserModule,

@@ -43,4 +43,13 @@ export class HomeComponent implements OnInit {
       return titleIndex !== -1 || descriptionIndex !== -1;
     });
   }
+
+  upcomingTodos() {
+    return this.items.filter((item) => {
+      const today = new Date();
+      const plus5day = new Date(today.setDate(today.getDate() + 5));
+
+      return !item.done && item.deadline && (item.deadline < plus5day);
+    });
+  }
 }

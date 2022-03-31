@@ -1,0 +1,12 @@
+<mat-card
+  class='todo-card cursor-pointer mat-elevation-z8'
+  [class.done]='todo.done'
+  (click)="router.navigate(['/todo', todo.id])"
+>
+  <mat-card-title class='mb-0'>{{todo.title}}</mat-card-title>
+  <mat-card-footer class='mb-0'>
+    <div class='text-muted px-3 deadline-text'>
+      {{todo.deadline?.toLocaleDateString('en-US')}}
+    </div>
+  </mat-card-footer>
+</mat-card>

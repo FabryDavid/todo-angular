@@ -3,11 +3,19 @@ import { v4 as uuidv4 } from 'uuid';
 import { SubTask } from './subTask';
 
 export class TodoItem {
+  get deadline(): Date | null {
+    return this._deadline;
+  }
+
+  set deadline(value: Date | null) {
+    this._deadline = value;
+  }
 
   constructor(
     private _title: string,
     private _description: string,
     private _done = false,
+    private _deadline: Date | null = null,
     private _subTasks: Array<SubTask> = [],
     private _id: string = ''
   ) {

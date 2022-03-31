@@ -15,6 +15,9 @@
     </div>
   </mat-card-content>
   <mat-card-footer>
+    <div class='text-muted px-3 deadline-text'>
+      {{todo.deadline?.toLocaleDateString('en-US')}}
+    </div>
     <mat-progress-bar color='accent' mode='determinate' [value]='todo.getDonePercent()'></mat-progress-bar>
   </mat-card-footer>
 </mat-card>

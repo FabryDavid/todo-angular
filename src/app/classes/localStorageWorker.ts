@@ -26,10 +26,13 @@ export class LocalStorageWorker {
         subTask.push(new SubTask(st['_title'], st['_done']));
       });
 
+      const deadline = item['_deadline'] ? new Date(item['_deadline']) : null;
+
       list.push(new TodoItem(
         item['_title'],
         item['_description'],
         item['_done'],
+        deadline,
         subTask,
         item['_id']
       ));

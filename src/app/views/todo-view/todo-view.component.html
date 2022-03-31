@@ -1,6 +1,7 @@
 <mat-card class='mx-auto w-100 mat-elevation-z8'>
   <div class='content'>
     <mat-card-title>{{item.title}}</mat-card-title>
+    <mat-card-subtitle>Deadline: {{item.deadline?.toLocaleDateString('en-US')}}</mat-card-subtitle>
     <mat-card-content>
       <p>{{item.description}}</p>
     </mat-card-content>
@@ -22,7 +23,9 @@
         <li *ngFor='let subtask of item.subTasks'>
           <mat-checkbox [(ngModel)]='subtask.done'
                         color='accent'
-                        (ngModelChange)='updateAllComplete()'>
+                        (ngModelChange)='updateAllComplete()'
+                        [class.text-decoration-line-through]='subtask.done'
+          >
             {{subtask.title}}
           </mat-checkbox>
         </li>
