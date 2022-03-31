@@ -6,9 +6,12 @@
   You have <b>{{upcomingTodos().length}}</b> upcoming todo with a deadline ending in the upcoming 5 day.
 </div>
 
-<div class='row mt-3'>
-  <div class='col-3' *ngFor='let item of upcomingTodos().slice(0,5)'>
+<div class='row mt-3 align-items-center'>
+  <div class='col-3' *ngFor='let item of upcomingTodos().slice(0, upcomingTodos().length < 5 ? 5 : 3)'>
     <app-todo-card-minimal [todo]='item'></app-todo-card-minimal>
+  </div>
+  <div class='col-3 fw-bold fs-5' *ngIf='upcomingTodos().length>=5'>
+    And more...
   </div>
 </div>
 
