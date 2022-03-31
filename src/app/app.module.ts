@@ -23,6 +23,8 @@ import { TodoCardComponent } from './components/todo-card/todo-card.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { TodoViewComponent } from './views/todo-view/todo-view.component';
 import { NotFoundComponent } from './views/not-found/not-found.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
     AddItemComponent,
     TodoCardComponent,
     TodoViewComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { NotFoundComponent } from './views/not-found/not-found.component';
     MatListModule,
     MatTooltipModule,
     MatCardModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatDialogModule
   ],
   providers: [
     MatNativeDateModule,

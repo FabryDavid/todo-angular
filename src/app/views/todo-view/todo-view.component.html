@@ -19,8 +19,20 @@
     <mat-divider inset></mat-divider>
 
     <mat-card-actions align='start' class='mb-0'>
-      <button mat-button color='accent'
-              (click)='switchDoneState()'>{{item.done ? 'Mark as not done' : 'Mark as done'}}</button>
+      <button
+        mat-flat-button
+        color='accent'
+        (click)='switchDoneState()'
+      >
+        {{item.done ? 'Mark as not done' : 'Mark as done'}}
+      </button>
+      <button
+        mat-button
+        color='accent'
+        (click)='deleteItem()'
+      >
+        Delete
+      </button>
     </mat-card-actions>
   </div>
 </mat-card>

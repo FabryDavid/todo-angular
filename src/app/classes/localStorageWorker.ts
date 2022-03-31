@@ -62,4 +62,18 @@ export class LocalStorageWorker {
 
     return false;
   }
+
+  public removeItem(item: TodoItem) {
+    const items = this.getAllItems();
+    const itemIndex = items.map((x) => x.id).indexOf(item.id);
+
+    if (itemIndex < 0) {
+      return false;
+    }
+
+    items.splice(itemIndex, 1);
+    localStorage.setItem(this.localStorageKey, JSON.stringify(items));
+
+    return true;
+  }
 }

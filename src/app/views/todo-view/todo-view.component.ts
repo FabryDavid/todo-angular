@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageWorker } from '../../classes/localStorageWorker';
 import { TodoItem } from '../../classes/todoItem';
 import { MatSelectionListChange } from '@angular/material/list';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../../components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-todo-view',
@@ -17,7 +19,8 @@ export class TodoViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {
   }
 
@@ -57,5 +60,17 @@ export class TodoViewComponent implements OnInit {
     }
 
     this.localStorageWorker.updateItem(this.item);
+  }
+
+  deleteItem() {
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (this.localStorageWorker.removeItem(this.item)) {
+          this.router.navigate(['/']);
+        }
+      }
+    });
   }
 }
